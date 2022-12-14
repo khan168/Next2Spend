@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 require("dotenv").config();
 
-const protect = asyncHandler(async(req,res,next)=>{
+const Auth = asyncHandler(async(req,res,next)=>{
     let token;
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         try {
@@ -24,4 +24,4 @@ const protect = asyncHandler(async(req,res,next)=>{
 
 });
 
-module.exports = {protect}
+module.exports = {Auth}

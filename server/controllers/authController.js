@@ -51,7 +51,7 @@ const  register = asyncHandler(async (req, res) => {
     const existinguser = await User.findOne({ email: email });
     if (existinguser) {
       res.status(400);
-      throw new Error("User already exists");
+      throw new Error("Invalid Credentials");
     }
     const hashedPassword = await bcrypt.hash(password, 8);
     const user = await User.create({
