@@ -22,20 +22,6 @@ const login= asyncHandler(async (req,res)=>{
         res.status(400);
         throw new Error("Invalid credentials");
     }
-    // if (!user) {
-    //   res.status(400);
-    //   throw new Error("invalid credentials");
-    // }
-    // bcrypt.compare(password,user.password,(err,result)=>{
-    //     if(err){
-    //         res.json({error:err});
-    //     }
-    //     if(result){
-    //         res.send("logged in")
-    //     }else{
-    //         res.json({message:"password doesnt match"})
-    //     }
-    // });
     
 });
 

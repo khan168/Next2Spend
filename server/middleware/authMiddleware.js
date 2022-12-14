@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 require("dotenv").config();
 
-const Auth = asyncHandler(async(req,res,next)=>{
+const Auth = async(req,res,next)=>{
     let token;
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         try {
@@ -13,15 +13,13 @@ const Auth = asyncHandler(async(req,res,next)=>{
             next()
         } catch (error) {
             console.log(error);
-            res.status(401)
-            throw new Error('Not authorised')
+            res.status(401).json({error:error})
         }
     }
     if(!token){
-        res.status(401);
-        throw new Error("Not authorised");
+        res.status(401).json({ error: "Not authorised" });
     }
 
-});
+};
 
 module.exports = {Auth}
