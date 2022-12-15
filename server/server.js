@@ -14,6 +14,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
   .then((result) => app.listen(PORT))
   .catch((err) => console.log(err));
 
-app.use(errorHandler)
+
 app.use("/api/user",require("./routes/userRoutes"))
+
+app.use(errorHandler);
 // app.get("/api/user/getuser",(req,res)=>{res.send("working")})
