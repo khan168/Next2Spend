@@ -37,32 +37,32 @@ const login= async (req,res)=>{
 // @ router     router /api/user/signup
 const  register = async (req, res,next) => {
     try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.status(422).json({ errors: errors.array() });
-        return;
-    }
-    const {name,email,password} = req.body;
-    const existinguser = await User.findOne({ email: email });
-    if(existinguser){
-        return res.status(400).json({error:"Invalid credentials"})
-    }
-    const hashedPassword = await bcrypt.hash(password, 8);
-    const user = await User.create({
-        name,
-        email,
-        password:hashedPassword
-    })
-    if(user){
-        res.status(201).json({
-            _id:user.id,
-            name:user.name,
-            email:user.email,
-            token:generateToken(user.id)
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(422).json({ errors: errors.array() });
+            return;
+        }
+        const {name,email,password} = req.body;
+        const existinguser = await User.findOne({ email: email });
+        if(existinguser){
+            return res.status(400).json({error:"Invalid credentials"})
+        }
+        const hashedPassword = await bcrypt.hash(password, 8);
+        const user = await User.create({
+            name,
+            email,
+            password:hashedPassword
         })
-    }else{
-        return res.status(400).json({ error: "Invalid data" })
-    }
+        if(user){
+            res.status(201).json({
+                _id:user.id,
+                name:user.name,
+                email:user.email,
+                token:generateToken(user.id)
+            })
+        }else{
+            return res.status(400).json({ error: "Invalid data" })
+        }
     }catch(err){
         res.status(400);
         res.json({ error: err });
