@@ -17,9 +17,6 @@ const login= async (req,res)=>{
         const user = await User.findOne({email:email}) 
         if(user && (await bcrypt.compare(password,user.password))){
             res.json({
-                _id:user.id,
-                name:user.name,
-                email:user.email,
                 token:generateToken(user.id)
             })
         }
@@ -35,7 +32,7 @@ const login= async (req,res)=>{
 
 // @ desc       sign up user
 // @ router     router /api/user/signup
-const  register = async (req, res,next) => {
+const  register = async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -55,13 +52,10 @@ const  register = async (req, res,next) => {
         })
         if(user){
             res.status(201).json({
-                _id:user.id,
-                name:user.name,
-                email:user.email,
                 token:generateToken(user.id)
             })
         }else{
-            return res.status(400).json({ error: "Invalid data" })
+            return res.status(500).json({ error: "Invalid data" })  //case of server error
         }
     }catch(err){
         res.status(400);
