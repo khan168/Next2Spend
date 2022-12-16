@@ -2,12 +2,18 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken")
 require("dotenv").config();
+const {validationResult } = require("express-validator");
 
 // @ desc       login user
 // @ router     router /api/user/login
 const login= async (req,res)=>{
-    const { email, password } = req.body;
-    try{
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(422).json({ errors: errors.array() });
+            return;
+        }
+        const { email, password } = req.body;
         const user = await User.findOne({email:email}) 
         if(user && (await bcrypt.compare(password,user.password))){
             res.json({
@@ -19,52 +25,47 @@ const login= async (req,res)=>{
         }
         else{
             res.status(400)
-            throw new Error("Invalid credentials")
+            res.json({error:"Invalid credentials"})
         }
     }catch(err){
-        res.json({ err: "Invalid credentials" });
+            res.status(400)
+            res.json({ error: err });
     }
 }
 
 // @ desc       sign up user
 // @ router     router /api/user/signup
 const  register = async (req, res,next) => {
-
+    try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(422).json({ errors: errors.array() });
+        return;
+    }
     const {name,email,password} = req.body;
-    
-    try{
-        if (!email || !name || !password) {
-            throw { message: "please add all fields" };
-        }
-        const existinguser = await User.findOne({ email: email });
-        if(existinguser){
-            res.status(400)
-            throw {message:"Invalid credentials"}
-        }
-        const hashedPassword = await bcrypt.hash(password, 8);
-        const user = await User.create({
-            name,
-            email,
-            password:hashedPassword
+    const existinguser = await User.findOne({ email: email });
+    if(existinguser){
+        return res.status(400).json({error:"Invalid credentials"})
+    }
+    const hashedPassword = await bcrypt.hash(password, 8);
+    const user = await User.create({
+        name,
+        email,
+        password:hashedPassword
+    })
+    if(user){
+        res.status(201).json({
+            _id:user.id,
+            name:user.name,
+            email:user.email,
+            token:generateToken(user.id)
         })
-        if(user){
-            res.status(201).json({
-                _id:user.id,
-                name:user.name,
-                email:user.email,
-                token:generateToken(user.id)
-            }
-            )
-        }else{
-            throw { message: "Invalid data" };
-        }
+    }else{
+        return res.status(400).json({ error: "Invalid data" })
+    }
     }catch(err){
-        if(!err.message){
-            res.status(400);
-            res.json({ err: "Invalid credentials" });
-        }else{
-            res.json({ err: err.message });
-        }
+        res.status(400);
+        res.json({ error: err });
     }
 }
 
