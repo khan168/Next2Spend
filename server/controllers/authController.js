@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken")
 require("dotenv").config();
 const {validationResult } = require("express-validator");
 
+
 // @ desc       login user
 // @ router     router /api/user/login
 const login= async (req,res)=>{
@@ -58,24 +59,9 @@ const  register = async (req, res) => {
             return res.status(500).json({ error: "Invalid data" })  //case of server error
         }
     }catch(err){
+        console.log(err);
         res.status(400);
         res.json({ error: err });
-    }
-}
-
-// @ desc       get user data
-// @ router     router /api/user/getuser
-// @ protected
-const getuser =async (req,res)=>{
-    try{
-        const {_id,name,email} = await User.findById(req.user.id)
-        res.status(200).json({
-            id:_id,
-            name,
-            email
-        })
-    }catch(err){
-        res.status(500).json({error:err})
     }
 }
 
@@ -89,5 +75,5 @@ const generateToken = (id)=>{
 }
 
 module.exports={
-    login,register,getuser
+    login,register
 }
