@@ -15,5 +15,5 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
   .catch((err) => console.log(err));
 
 
-app.use("/api/user",require("./routes/userRoutes"))
-
+app.use("/api/user",require("./routes/userRoutes"))  //signup, login , getuserinfo
+app.use("/api/transactions", require("./routes/transactionRoutes"));
