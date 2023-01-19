@@ -13,15 +13,16 @@
 
 .LogoContainer {
     display: flex;
-
     align-items: center;
 }
 
-.LogoContainer span {
+.LogoContainer a {
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
     font-size: 40px;
     text-transform: uppercase;
+    color: #1A535C;
+    text-decoration: none;
 }
 
 .ButtonLinks {
@@ -39,7 +40,12 @@
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
-    color: black;
+    color: #1A535C;
     background-color: #FFE66D;
     border-radius: 5px;
+    text-decoration: none;
+}
+
+.ButtonLinks a:hover{
+    opacity: 0.7;
 }
