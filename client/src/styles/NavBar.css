@@ -9,6 +9,7 @@
     align-items: center;
     padding: 0 2rem;
     box-shadow: 0 10px 100px rgb(0 0 0 / 10%);
+    position: absolute;
 }
 
 .LogoContainer {
@@ -38,7 +39,7 @@
     display: inline-block;
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
     text-transform: uppercase;
     color: #1A535C;
     background-color: #FFE66D;
