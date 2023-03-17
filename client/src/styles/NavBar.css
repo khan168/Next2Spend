@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
+
+.NavBar {
+    background-color: #F7FFF7;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    box-shadow: 0 10px 100px rgb(0 0 0 / 10%);
+    position: absolute;
+}
+
+.LogoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.LogoContainer a {
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #1A535C;
+    text-decoration: none;
+}
+
+.ButtonLinks {
+    display: flex;
+}
+
+.ButtonLinks li {
+    list-style: none;
+}
+.ButtonLinks a {
+    margin-left: 1rem;
+    padding: 0.375rem 1rem;
+    display: inline-block;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #1A535C;
+    background-color: #FFE66D;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.ButtonLinks a:hover{
+    opacity: 0.7;
+}
