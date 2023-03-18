@@ -7,7 +7,7 @@ import SignUpPage from "./components/SignUpPage";
 import LoginPage from "./components/LoginPage";
 import Home from "./components/Home";
 import NavBar from './components/NavBar';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/dashboard';
 
 
 function App() {
