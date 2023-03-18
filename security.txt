@@ -1,0 +1,33 @@
+It's important to note that storing JWTs in local storage can be a security risk, as it can be vulnerable to cross-site scripting (XSS) attacks. To mitigate this risk, you can consider storing the JWT in an HttpOnly cookie instead of local storage. This way, the JWT is only accessible to the server and cannot be accessed by JavaScript running in the browser.
+
+//api call to protected endpoint
+import axios from 'axios';
+
+const API_URL = 'https://your-api-url.com/api';
+const TOKEN_KEY = 'your-jwt-token-key';
+
+// Set the default Authorization header with the JWT token
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(TOKEN_KEY)}`;
+
+// Define an Axios instance with the base URL of your API
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+});
+
+// Define a function to get data from a protected endpoint
+export const getProtectedData = async () => {
+  try {
+    // Make an API call to a protected endpoint
+    const response = await axiosInstance.get('/protected-data');
+
+    // Return the response data
+    return response.data;
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+    throw error;
+  }
+};
+
+
+
