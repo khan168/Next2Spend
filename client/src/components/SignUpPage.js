@@ -1,40 +1,76 @@
-import '../styles/SignUpPage.css';
+import "../styles/SignUpPage.css";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function SignUpPage(){
-    return (
-        <div className="SignUpPage">
-            <div className="SignUpContainer">
-                <h1>Sign Up</h1>
-                <div className="SignUpForm">
-                    <form className="SignUp" action="/signup" method="post">
-                        <div className='DataInput'>
-                            <label htmlFor="fname">First Name: </label>
-                            <input type="text" id="fname" name="fname" placeholder="Jane" required></input>
-                        </div>
-                        <div className='DataInput'>
-                            <label htmlFor="lname">Last Name: </label>
-                            <input type="text" id="lname" name="lname" placeholder="Doe" required></input>
-                        </div>
-                        <div className='DataInput'>
-                            <label htmlFor="email">Email: </label>
-                            <input type="text" id="email" name="email" placeholder="janedoe@gmail.com" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required></input>
-                        </div>
-                        <div className='DataInput'>
-                            <label htmlFor="password1">Password: </label>
-                            <input type="password" id="password1" name="password" required></input>
-                        </div>
-                        <div className='DataInput'>
-                            <label htmlFor="password2">Confirm Password: </label>
-                            <input type="password" id="password2" name="password" required></input>
-                        </div>
-                        <div className='SignUpButton'>
-                            <input type="submit" value="sign up"></input>
-                        </div>
-                    </form>
-                </div>
+
+function SignUpPage() {
+  const [err, setErr] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const name = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+    const data = { name, email, password };
+    try {
+      const url = "http://localhost:5000/api/user/signup";
+      const { data: res } = await axios.post(url,data);
+      console.log(res.messsage);
+      navigate("/login")
+    } catch (err) {
+      setErr(true);
+    }
+  };
+  return (
+    <div class="SignUpPage">
+      <div className="SignUpContainer">
+        <h1>Sign Up</h1>
+        <div className="SignUpForm">
+          <form className="SignUp" onSubmit={handleSubmit}>
+            <div className="DataInput">
+              <label for="name">Name: </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Jane"
+                required
+              ></input>
             </div>
+            <div className="DataInput">
+              <label for="email">Email: </label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="janedoe@gmail.com"
+                required
+              ></input>
+            </div>
+            <div className="DataInput">
+              <label for="password">Password: </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+              ></input>
+            </div>
+            <div className="SignUpButton">
+              <input
+                type="submit"
+                value="sign up"
+                onSubmit={handleSubmit}
+              ></input>
+            </div>
+          </form>
+          {err && <span>Something went wrong</span>}
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default SignUpPage;
