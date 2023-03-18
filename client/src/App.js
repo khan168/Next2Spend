@@ -6,9 +6,9 @@ import {
 import SignUpPage from "./components/SignUpPage";
 import LoginPage from "./components/LoginPage";
 import Home from "./components/Home";
-import NavBar from "./components/NavBar";
-import Dashboard from "./components/dashboard";
-import React from "react";
+import NavBar from './components/NavBar';
+import Dashboard from './components/Dashboard';
+
 
 function App() {
 
@@ -19,6 +19,7 @@ function App() {
     <Router>
       <NavBar />
       <Routes>
+
         {user && <Route path="/" exact element={<Dashboard />} />}
         <Route path="/signup" exact element={<SignUpPage />} />
         <Route path="/login" exact element={<LoginPage/>} />

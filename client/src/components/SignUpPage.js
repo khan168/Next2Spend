@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 function SignUpPage() {
   const [err, setErr] = React.useState(false);
   const navigate = useNavigate();
