@@ -16,7 +16,7 @@ function Dashboard(){
                         <li>Transactions</li>
                         <li>Wallet</li>
                         <button onClick={handleLogout} className="LogoutButton">
-                            Logout
+                        Logout
                         </button>
                     </ul>
                 </div>
