@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const user = require("../models/user")
+// const user = require("../models/user")
 
 const trasactionSchema = new mongoose.Schema({
     amount:{
@@ -10,6 +10,10 @@ const trasactionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    title:{
+        type:String,
+        required:true
+    }
 },  {
     timestamps:true
 });
