@@ -8,19 +8,34 @@ import LoginPage from "./components/LoginPage";
 import Home from "./components/Home";
 import NavBar from './components/NavBar';
 import Dashboard from './components/dashboard';
+import React from "react";
+import axios from "axios";
 
 
 function App() {
 
+  const [data, setdata] = React.useState(null);
   //check if user is logged in ? send to home : send to login page
   const user =localStorage.getItem("token")
 
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/user/userinfo", {
+        headers: {
+          Authorization: `Bearer ${user}`,
+        },
+      })
+      .then((response) => setdata(response.data))
+      .catch((error) => console.log(error));
+  },[]);
+  
+  
   return (
     <Router>
-      <NavBar />
+      <NavBar data={data} />
       <Routes>
 
-        {user && <Route path="/" exact element={<Dashboard />} />}
+        {user && <Route path="/" exact element={<Dashboard data={data}/>} />}
         <Route path="/signup" exact element={<SignUpPage />} />
         <Route path="/login" exact element={<LoginPage/>} />
         <Route path="/" exact element={<SignUpPage />} />
