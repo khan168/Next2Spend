@@ -36,7 +36,7 @@ const getUserTransactions =async (req,res,next)=>{
 // @ protected
 const createTransaction =async (req,res,next)=>{
     try{
-        const transaction = new Transaction({amount:req.body.amount,userid:req.user.id},);
+        const transaction = new Transaction({amount:req.body.amount,userid:req.user.id,title:req.body.title},);
         await transaction.save();
         res.status(201).json({ transaction: transaction });
     }catch(err){
