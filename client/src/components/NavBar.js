@@ -3,7 +3,13 @@ import '../styles/NavBar.css';
 import React from "react";
 
 function NavBar(props){
+  const [pathName, setPathName] = useState(window.location.pathname);
 
+  window.onpopstate = function (event) {
+    setPathName(window.location.pathname);
+  };
+
+  const shouldShowHello = pathName !== "/login" && pathName !== "/signup";
     return (
       <div className="NavBar">
         <div className="LogoContainer">
@@ -21,9 +27,9 @@ function NavBar(props){
                 Sign Up
               </a>
             </li>
-            {props.data &&<li className="ButtonLinkWrapper">
-                Hello {props.data.name}
-            </li>}
+            {shouldShowHello && props.data && (
+              <li className="ButtonLinkWrapper">Hello {props.data.name}</li>
+            )}
           </ul>
         </div>
       </div>
