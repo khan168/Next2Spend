@@ -70,7 +70,7 @@ function Dashboard(){
         {showModal && (
           <div className="popupForm">
             <form
-            onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
               className="addForm"
               id="addTransaction"
             >
@@ -83,7 +83,7 @@ function Dashboard(){
                 id="amount"
                 name="amount"
                 value={amount}
-                onChange={(e)=>handleAmountChange(e)}
+                onChange={(e) => handleAmountChange(e)}
               />
               <label htmlFor="reason">Reason: </label>
               <input
@@ -105,11 +105,7 @@ function Dashboard(){
                 required
               />{" "}
               <br />
-              <button
-                className="btn"
-              >
-                ADD
-              </button>
+              <button className="btn">ADD</button>
             </form>
           </div>
         )}
@@ -137,27 +133,27 @@ function Dashboard(){
           <div className="dashboardContainer">
             <div className="moneyContainer">
               <div className="moneyLeft">
-                <h3>Money Left:</h3>
+                <h3>Money Left:${sum}</h3>
               </div>
-              <div className="cardInfo"></div>
-                <p>${sum}</p>
-              </div>
-              <div className="addTransactionButton">
-                <button className="add" onClick={toggleForm}>
-                  Add Transaction
-                </button>
+              <div className="cardInfo">
+                <div className="addTransactionButton">
+                  <button className="add" onClick={toggleForm}>
+                    Add Transaction
+                  </button>
+                </div>
               </div>
             </div>
-
             <div className="spendingsConatiner">
               <h3>Latest Spendings:</h3>
               <ul className="spendings">
                 {list.map((e, i) => {
-                  return <li className='spending' key={i}>
-                                <p className='date'>12-1-21</p>
-                                <p className='title'>{e.title}</p>
-                                <p className='amount'>${e.amount}</p>
-                            </li>
+                  return (
+                    <li className="spending" key={i}>
+                      <p className="date">12-1-21</p>
+                      <p className="title">{e.title}</p>
+                      <p className="amount">${e.amount}</p>
+                    </li>
+                  );
                 })}
               </ul>
             </div>

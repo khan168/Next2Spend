@@ -6,6 +6,7 @@
 }
 
 .dashboardContainer {
+  margin-bottom: 70px;
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -123,6 +124,7 @@
 }
 
 .spendingsConatiner {
+  margin-top: 200px;
   margin: 1rem auto;
   padding: 3% 5%;
   border-radius: 5px;

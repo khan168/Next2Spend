@@ -18,6 +18,7 @@ function App() {
   //check if user is logged in ? send to home : send to login page
   const user =localStorage.getItem("token")
 
+  
   React.useEffect(() => {
     axios
       .get("http://localhost:5000/api/user/userinfo", {
