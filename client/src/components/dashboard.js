@@ -1,7 +1,10 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Dashboard.css';
+import axios from "axios";
 
 function Dashboard(){
+    const [list,setList] = useState([])
     const [amount, setAmount] = useState("");
     const [maxDate, setMaxDate] = useState("");
     const [reason,setReason]=useState("");
@@ -9,6 +12,20 @@ function Dashboard(){
         localStorage.removeItem("token");
         window.location.reload();
       };
+    const user = localStorage.getItem("token");
+    React.useEffect(()=>{
+        //get all transactions
+        axios
+          .get("http://localhost:5000/api/transactions", {
+            headers: {
+              Authorization: `Bearer ${user}`,
+            },
+          })
+          .then((response) => setList(response.data.transaction))
+          .catch((error) => console.log(error));
+    },[])
+
+    const sum = list.reduce((total, item) => total + item.amount, 0);
 
     const handleSubmit=(e)=>{
         e.preventDefault();
@@ -113,6 +130,7 @@ function Dashboard(){
               </button>
             </ul>
           </div>
+
           {showModal && <div className="overlay"></div>}
         </div>
         <div className="rightSide">
@@ -120,7 +138,9 @@ function Dashboard(){
             <div className="moneyContainer">
               <div className="moneyLeft">
                 <h3>Money Left:</h3>
-                <p>$10,000</p>
+              </div>
+              <div className="cardInfo"></div>
+                <p>${sum}</p>
               </div>
               <div className="addTransactionButton">
                 <button className="add" onClick={toggleForm}>
@@ -132,46 +152,13 @@ function Dashboard(){
             <div className="spendingsConatiner">
               <h3>Latest Spendings:</h3>
               <ul className="spendings">
-                <li className="spending">
-                  <p className="date">March 14, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
-                <li className="spending">
-                  <p className="date">March 15, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
-                <li className="spending">
-                  <p className="date">March 16, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
-                <li className="spending">
-                  <p className="date">March 14, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
-                <li className="spending">
-                  <p className="date">March 14, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
-                <li className="spending">
-                  <p className="date">March 14, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
-                <li className="spending">
-                  <p className="date">March 14, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
-                <li className="spending">
-                  <p className="date">March 14, 2023</p>
-                  <p className="title">Spotify Premium</p>
-                  <p className="amount">$10</p>
-                </li>
+                {list.map((e, i) => {
+                  return <li className='spending' key={i}>
+                                <p className='date'>12-1-21</p>
+                                <p className='title'>{e.title}</p>
+                                <p className='amount'>${e.amount}</p>
+                            </li>
+                })}
               </ul>
             </div>
           </div>
