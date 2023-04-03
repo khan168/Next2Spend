@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import SignUpPage from "./components/SignUpPage";
 import LoginPage from "./components/LoginPage";
-import Home from "./components/Home";
+import Transactions from "./components/Transactions";
 import NavBar from './components/NavBar';
 import Dashboard from './components/dashboard';
 import React from "react";
@@ -35,7 +35,9 @@ function App() {
       <NavBar data={data} />
       <Routes>
 
+
         {user && <Route path="/" exact element={<Dashboard data={data}/>} />}
+        <Route path="/transactions" exact element={<Transactions />} />
         <Route path="/signup" exact element={<SignUpPage />} />
         <Route path="/login" exact element={<LoginPage/>} />
         <Route path="/" exact element={<SignUpPage />} />

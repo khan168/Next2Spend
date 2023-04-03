@@ -38,6 +38,12 @@
     width: 70%;
 }
 
+@media only screen and (min-width: 1024px) {
+    .LogIn {
+      width: 40%;
+    }
+}
+
 .DataInput {
     margin-bottom: 1rem;
     display: block;
