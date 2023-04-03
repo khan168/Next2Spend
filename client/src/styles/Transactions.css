@@ -1,0 +1,23 @@
+.transactionsPage {
+    height: 90vh;
+    top: 10vh;
+    position: relative;
+    background-color: beige;
+}
+
+.transactionsContainer {
+    position: relative;
+    top: 10%;
+}
+
+.transactionsContainer h1 {
+    font-family: Cabin, sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: #1A535C;
+}
