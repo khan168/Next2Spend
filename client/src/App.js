@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import SignUpPage from "./components/SignUpPage";
 import LoginPage from "./components/LoginPage";
-import Home from "./components/Home";
+import Transactions from "./components/Transactions";
 import NavBar from './components/NavBar';
 import Dashboard from './components/dashboard';
 import React from "react";
@@ -18,6 +18,7 @@ function App() {
   //check if user is logged in ? send to home : send to login page
   const user =localStorage.getItem("token")
 
+  
   React.useEffect(() => {
     axios
       .get("http://localhost:5000/api/user/userinfo", {
@@ -35,7 +36,9 @@ function App() {
       <NavBar data={data} />
       <Routes>
 
+
         {user && <Route path="/" exact element={<Dashboard data={data}/>} />}
+        <Route path="/transactions" exact element={<Transactions />} />
         <Route path="/signup" exact element={<SignUpPage />} />
         <Route path="/login" exact element={<LoginPage/>} />
         <Route path="/" exact element={<SignUpPage />} />

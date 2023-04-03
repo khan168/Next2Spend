@@ -9,7 +9,10 @@ function NavBar(props){
     setPathName(window.location.pathname);
   };
 
+  const user = localStorage.getItem("token");
+  console.log(user);
   const shouldShowHello = pathName !== "/login" && pathName !== "/signup";
+  const shouldShowLoginSignup = pathName ==="/login" || pathName==="/signup" || (pathName==="/" && user===null);
     return (
       <div className="NavBar">
         <div className="LogoContainer">
@@ -17,16 +20,16 @@ function NavBar(props){
         </div>
         <div className="Buttons">
           <ul className="ButtonLinks">
-            <li className="ButtonLinkWrapper">
+            {shouldShowLoginSignup && <li className="ButtonLinkWrapper">
               <a href="/login" className="ButtonLink">
                 Log In
               </a>
-            </li>
-            <li className="ButtonLinkWrapper">
+            </li>}
+            {shouldShowLoginSignup && <li className="ButtonLinkWrapper">
               <a href="/signup" className="ButtonLink">
                 Sign Up
               </a>
-            </li>
+            </li>}
             {shouldShowHello && props.data && (
               <li className="ButtonLinkWrapper">Hello {props.data.name}</li>
             )}

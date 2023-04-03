@@ -9,7 +9,7 @@
 
 .SignUpContainer {
     position: relative;
-    top: 10vh;
+    top: 10%;
 }
 
 .SignUpPage h1 {
@@ -36,6 +36,12 @@
     background-color: #4ECDC4;
     border-radius: 5px;
     width: 70%;
+}
+
+@media only screen and (min-width: 1024px) {
+    .SignUp {
+      width: 40%;
+    }
 }
 
 .DataInput {
