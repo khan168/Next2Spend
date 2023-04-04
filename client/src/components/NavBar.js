@@ -10,7 +10,6 @@ function NavBar(props){
   };
 
   const user = localStorage.getItem("token");
-  console.log(user);
   const shouldShowHello = pathName !== "/login" && pathName !== "/signup";
   const shouldShowLoginSignup = pathName ==="/login" || pathName==="/signup" || (pathName==="/" && user===null);
     return (

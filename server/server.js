@@ -21,3 +21,6 @@ connect()
 app.listen(PORT,()=>{console.log(`listening on port ${PORT}`);})
 app.use("/api/user",require("./routes/userRoutes"))  //signup, login , getuserinfo
 app.use("/api/transactions", require("./routes/transactionRoutes"));
+
+
+//mern stack mongodb express react node
