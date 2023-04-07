@@ -66,7 +66,7 @@ const updateTransaction =async (req,res,next)=>{
 // @ protected
 const deleteTransaction =async (req,res,next)=>{
     try{
-        await Transaction.findOneAndDelete({ _id: req.body.id });
+        await Transaction.findOneAndDelete({ _id: req.params.id });
         res.status(200).json({message:`Deleted ${req.body.id} successfully`})
     }catch(err){
         next(err);

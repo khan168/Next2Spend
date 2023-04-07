@@ -4,7 +4,7 @@ import '../styles/Dashboard.css';
 import axios from "axios";
 
 function Dashboard(){
-    const [list,setList] = useState([])
+    const [list,setList] = useState([]);
     const [amount, setAmount] = useState("");
     const [maxDate, setMaxDate] = useState("");
     const [reason,setReason]=useState("");

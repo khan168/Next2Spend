@@ -6,7 +6,7 @@ const { ErrorHandler } = require("../middleware/ServerErrorHandler");
 
 router.get("/", Auth,getUserTransactions,ErrorHandler);
 router.post("/", Auth, createTransaction, ErrorHandler);
-router.delete("/", Auth, deleteTransaction, ErrorHandler);
+router.delete("/:id", Auth, deleteTransaction, ErrorHandler);
 router.patch("/", Auth, updateTransaction, ErrorHandler);
 
 module.exports = router
