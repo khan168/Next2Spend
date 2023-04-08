@@ -33,6 +33,7 @@
     margin-bottom: 1rem;
     color: #1A535C;
 }
+
 .searchBar {
     display: flex;
     align-items: center;
@@ -77,5 +78,4 @@
 .btn-delete:hover{
     opacity: 1;
 }
-
 

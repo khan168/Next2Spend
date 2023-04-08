@@ -36,7 +36,12 @@ const getUserTransactions =async (req,res,next)=>{
 // @ protected
 const createTransaction =async (req,res,next)=>{
     try{
-        const transaction = new Transaction({amount:req.body.amount,userid:req.user.id,title:req.body.title},);
+        const transaction = new Transaction({
+          amount: req.body.amount,
+          userid: req.user.id,
+          title: req.body.title,
+          transactionDate:req.body.transactionDate,
+        });
         await transaction.save();
         res.status(201).json({ transaction: transaction });
     }catch(err){
@@ -61,7 +66,7 @@ const updateTransaction =async (req,res,next)=>{
 // @ protected
 const deleteTransaction =async (req,res,next)=>{
     try{
-        await Transaction.findOneAndDelete({ _id: req.body.id });
+        await Transaction.findOneAndDelete({ _id: req.params.id });
         res.status(200).json({message:`Deleted ${req.body.id} successfully`})
     }catch(err){
         next(err);

@@ -13,6 +13,10 @@ const trasactionSchema = new mongoose.Schema({
     title:{
         type:String,
         required:true
+    },
+    transactionDate:{
+        type:String,
+        required:true
     }
 },  {
     timestamps:true

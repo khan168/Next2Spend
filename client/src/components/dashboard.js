@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import '../styles/Dashboard.css';
 import axios from "axios";
 
 function Dashboard(){
-    const [list,setList] = useState([])
+    const [list,setList] = useState([]);
     const [amount, setAmount] = useState("");
     const [maxDate, setMaxDate] = useState("");
     const [reason,setReason]=useState("");
@@ -15,24 +15,44 @@ function Dashboard(){
     const user = localStorage.getItem("token");
     React.useEffect(()=>{
         //get all transactions
+        fetchdata();
+    },[])
+
+    const fetchdata = ()=>{
+    axios
+      .get("http://localhost:5000/api/transactions", {
+        headers: {
+          Authorization: `Bearer ${user}`,
+        },
+      })
+      .then((response) => setList(response.data.transaction))
+      .catch((error) => console.log(error));
+    }
+
+    const sum = list.reduce((total, item) => total + item.amount, 0);
+    const shortlist = list.slice(-5);
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+
+        //create transaction
+        const amount = e.target[1].value.slice(1);
+        const reason = e.target[2].value;
+        const maxDate = e.target[3].value;
+        const data = { amount:amount, title: reason, transactionDate:maxDate };
         axios
-          .get("http://localhost:5000/api/transactions", {
+          .post("http://localhost:5000/api/transactions", data, {
             headers: {
               Authorization: `Bearer ${user}`,
             },
           })
-          .then((response) => setList(response.data.transaction))
-          .catch((error) => console.log(error));
-    },[])
-
-    const sum = list.reduce((total, item) => total + item.amount, 0);
-
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-        console.log(maxDate);
-        console.log(reason);
-        console.log(amount);
-        toggleForm()
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+          fetchdata()
+          toggleForm()
     }
 
     const handleAmountChange = (event) => {
@@ -140,16 +160,17 @@ function Dashboard(){
             <div className="spendingsConatiner">
               <h3>Latest Spendings:</h3>
               <ul className="spendings">
-                {list.map((e, i) => {
+                {shortlist.map((e, i) => {
                   return (
                     <li className="spending" key={i}>
-                      <p className="date">12-1-21</p>
+                      <p className="date">{e.transactionDate}</p>
                       <p className="title">{e.title}</p>
                       <p className="amount">${e.amount}</p>
                     </li>
                   );
                 })}
               </ul>
+              <h1>....</h1>
             </div>
           </div>
         </div>
