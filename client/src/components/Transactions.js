@@ -24,48 +24,57 @@ function Transactions() {
             <h1>Transactions</h1>
             <div className='spendingsConatiner'>
                 <div className="searchBar">
-                    <input type="search" placeholder="Search here" />
+                    <input type="search" placeholder="Search here"></input>
+                    <i class="gg-search"></i>
                 </div>
                 <ul className='spendings'>
                     <li className='spending'>
                         <p className='date'>March 14, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                     <li className='spending'>
                         <p className='date'>March 15, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                     <li className='spending'>
                         <p className='date'>March 16, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                     <li className='spending'>
                         <p className='date'>March 14, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                     <li className='spending'>
                         <p className='date'>March 14, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                     <li className='spending'>
                         <p className='date'>March 14, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                     <li className='spending'>
                         <p className='date'>March 14, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                     <li className='spending'>
                         <p className='date'>March 14, 2023</p>
                         <p className='title'>Spotify Premium</p>
                         <p className='amount'>$10</p>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
                     </li>
                 </ul>
             </div>
