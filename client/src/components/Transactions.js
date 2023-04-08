@@ -16,9 +16,6 @@ function Transactions() {
                 <li>
                     <a href="/">Wallet</a>
                 </li>
-                {/* <button onClick={handleLogout} className="LogoutButton"> */}
-                    {/* Logout */}
-                {/* </button> */}
                 </ul>
             </div>
         </div>
@@ -26,6 +23,9 @@ function Transactions() {
             <div className="transactionsContainer">
             <h1>Transactions</h1>
             <div className='spendingsConatiner'>
+                <div className="searchBar">
+                    <input type="search" placeholder="Search here" />
+                </div>
                 <ul className='spendings'>
                     <li className='spending'>
                         <p className='date'>March 14, 2023</p>

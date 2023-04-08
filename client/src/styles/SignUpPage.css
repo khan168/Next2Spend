@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
 
 .SignUpPage {
-    background-color: beige;
+    background-image: url("/public/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     height: 110vh;
     top: 10vh;
     position: relative;
@@ -34,6 +37,7 @@
 .SignUp {
     padding: 2rem 2rem 2rem 2rem;
     background-color: #4ECDC4;
+    box-shadow: 0 10px 100px rgb(0 0 0 / 10%);
     border-radius: 5px;
     width: 70%;
 }
