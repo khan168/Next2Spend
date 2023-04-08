@@ -26,16 +26,40 @@ function Transactions() {
 
   return (
     <div className="transactionsPage">
-      <div className="transactionsContainer">
-        <h1>Transactions</h1>
-        <div className="spendingsConatiner">
-          <ul className="spendings">
-            {list.map((e, i) => {
+        <div className="leftSide">
+            <div className="menu">
+                <ul className="menuList">
+                <li>
+                    <a href="/">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/transactions">Transactions</a>
+                </li>
+                <li>
+                    <a href="/">Wallet</a>
+                </li>
+                </ul>
+            </div>
+        </div>
+        <div className="rightSide">
+            <div className="transactionsContainer">
+            <h1>Transactions</h1>
+            <div className='spendingsConatiner'>
+                <div className="searchBar">
+                    <input type="search" placeholder="Search here"></input>
+                    <i class="gg-search"></i>
+                </div>
+                <ul className='spendings'>
+                    <li className='spending'>
+                    {list.map((e, i) => {
               return <SingleTransaction key={i} prop2={e} func={fetchdata}></SingleTransaction>;
             })}
-          </ul>
+                        <button className="btn-delete"><i class="gg-trash"></i></button>
+                    </li>
+                </ul>
+            </div>
+            </div>
         </div>
-      </div>
     </div>
   );
 }
