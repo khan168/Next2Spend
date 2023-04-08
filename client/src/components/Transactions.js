@@ -8,6 +8,7 @@ import { SingleTransaction } from "./Transaction";
 function Transactions() {
   const user = localStorage.getItem("token");
   const [list, setList] = useState([]);
+  const [searchvalue,setsearchvalue]=useState("");
   React.useEffect(() => {
     //get all transactions
     fetchdata();
@@ -24,6 +25,7 @@ function Transactions() {
       .catch((error) => console.log(error));
   };
 
+  const filteredList=list.filter((ele)=>(ele.title.toLowerCase().includes(searchvalue.toLowerCase())));
   return (
     <div className="transactionsPage">
         <div className="leftSide">
@@ -46,11 +48,11 @@ function Transactions() {
             <h1>Transactions</h1>
             <div className='spendingsConatiner'>
                 <div className="searchBar">
-                    <input type="search" placeholder="Search here"></input>
+                    <input type="search" placeholder="Search here"  onChange={(e)=>{setsearchvalue(e.target.value)}} value={searchvalue}></input>
                     <i className="gg-search"></i>
                 </div>
                 <ul className='spendings'>
-                    {list.map((e, i) => {
+                    {filteredList.map((e, i) => {
               return <SingleTransaction key={i} prop2={e} func={fetchdata}></SingleTransaction>;
             })}
                 </ul>
