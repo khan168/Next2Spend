@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import '../styles/NavBar.css';
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavBar(props){
   const [pathName, setPathName] = useState(window.location.pathname);
-
   window.onpopstate = function (event) {
     setPathName(window.location.pathname);
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    window.location.href = "/";
+    // window.location.reload();
   };
 
   const user = localStorage.getItem("token");

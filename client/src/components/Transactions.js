@@ -47,15 +47,12 @@ function Transactions() {
             <div className='spendingsConatiner'>
                 <div className="searchBar">
                     <input type="search" placeholder="Search here"></input>
-                    <i class="gg-search"></i>
+                    <i className="gg-search"></i>
                 </div>
                 <ul className='spendings'>
-                    <li className='spending'>
                     {list.map((e, i) => {
               return <SingleTransaction key={i} prop2={e} func={fetchdata}></SingleTransaction>;
             })}
-                        <button className="btn-delete"><i class="gg-trash"></i></button>
-                    </li>
                 </ul>
             </div>
             </div>

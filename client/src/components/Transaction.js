@@ -16,6 +16,7 @@ export const SingleTransaction = (props) => {
         })
         .then((response) => {
           props.func(); // call the `func` prop to update the list
+          handleClick();
         })
         .catch((error) => console.log(error));
     };
@@ -30,8 +31,8 @@ export const SingleTransaction = (props) => {
         <p className="date">{props.prop2.transactionDate}</p>
         <p className="title">{props.prop2.title}</p>
         <p className="amount">${props.prop2.amount}</p>
-        <button onClick={handleClick}>
-          <FontAwesomeIcon icon={faTrash} />
+        <button className="btn-delete">
+          <i onClick={handleClick} className="gg-trash"></i>
         </button>
       </li>
 

@@ -8,10 +8,6 @@ function Dashboard(){
     const [amount, setAmount] = useState("");
     const [maxDate, setMaxDate] = useState("");
     const [reason,setReason]=useState("");
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        window.location.reload();
-      };
     const user = localStorage.getItem("token");
     React.useEffect(()=>{
         //get all transactions
@@ -35,9 +31,9 @@ function Dashboard(){
         e.preventDefault();
 
         //create transaction
-        const amount = e.target[1].value.slice(1);
-        const reason = e.target[2].value;
-        const maxDate = e.target[3].value;
+        const amount = parseInt(e.target[0].value.slice(1));
+        const reason = e.target[1].value;
+        const maxDate = e.target[2].value;
         const data = { amount:amount, title: reason, transactionDate:maxDate };
         axios
           .post("http://localhost:5000/api/transactions", data, {
@@ -46,13 +42,13 @@ function Dashboard(){
             },
           })
           .then((response) => {
-            console.log(response.data);
+            fetchdata();
+            toggleForm();
           })
           .catch((error) => {
             console.error(error);
           });
-          fetchdata()
-          toggleForm()
+          
     }
 
     const handleAmountChange = (event) => {
