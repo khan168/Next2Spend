@@ -25,21 +25,32 @@ function NavBar(props){
         </div>
         <div className="Buttons">
           <ul className="ButtonLinks">
-            {shouldShowLoginSignup && <li className="ButtonLinkWrapper">
-              <a href="/login" className="ButtonLink">
-                Log In
-              </a>
-            </li>}
-            {shouldShowLoginSignup && <li className="ButtonLinkWrapper">
-              <a href="/signup" className="ButtonLink">
-                Sign Up
-              </a>
-            </li>}
-            {shouldShowHello && props.data && (
-              <li className="ButtonLinkWrapper showName">Hello, {props.data.name}</li>
+            {shouldShowLoginSignup && (
+              <li className="ButtonLinkWrapper">
+                <Link to="/login" className="ButtonLink">
+                  Log In
+                </Link>
+              </li>
+            )}
+            {shouldShowLoginSignup && (
+              <li className="ButtonLinkWrapper">
+                <Link to="/signup" className="ButtonLink">
+                  Sign up
+                </Link>
+              </li>
             )}
             {shouldShowHello && props.data && (
-              <button onClick={handleLogout} className="LogoutButton showLogout">Log Out</button>
+              <li className="ButtonLinkWrapper showName">
+                Hello, {props.data.name}
+              </li>
+            )}
+            {shouldShowHello && props.data && (
+              <button
+                onClick={handleLogout}
+                className="LogoutButton showLogout"
+              >
+                Log Out
+              </button>
             )}
           </ul>
         </div>

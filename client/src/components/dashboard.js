@@ -2,6 +2,7 @@
 import React, { useState, useEffect} from 'react';
 import '../styles/Dashboard.css';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 function Dashboard(){
     const [list,setList] = useState([]);
@@ -115,9 +116,11 @@ function Dashboard(){
                 required
               />{" "}
               <br />
-              <div className='btns'>
+              <div className="btns">
                 <button className="btn">ADD</button>
-                <button className="btn-exit" onClick={toggleForm}>EXIT</button>
+                <button className="btn-exit" onClick={toggleForm}>
+                  EXIT
+                </button>
               </div>
             </form>
           </div>
@@ -126,13 +129,14 @@ function Dashboard(){
           <div className="menu">
             <ul className="menuList">
               <li>
-                <a href="/">Dashboard</a>
+                <Link to="/" className="ButtonLink">
+                  Dashboard
+                </Link>
               </li>
               <li>
-                <a href="/transactions">Transactions</a>
-              </li>
-              <li>
-                <a href="/">Wallet</a>
+                <Link to="/transactions" className="ButtonLink">
+                  Transactions
+                </Link>
               </li>
             </ul>
           </div>

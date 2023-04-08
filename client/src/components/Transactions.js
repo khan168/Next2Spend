@@ -3,6 +3,7 @@ import "../styles/Transactions.css";
 import axios from "axios";
 import { useState } from "react";
 import { SingleTransaction } from "./Transaction";
+import { Link } from "react-router-dom";
 
 
 function Transactions() {
@@ -28,37 +29,51 @@ function Transactions() {
   const filteredList=list.filter((ele)=>(ele.title.toLowerCase().includes(searchvalue.toLowerCase())));
   return (
     <div className="transactionsPage">
-        <div className="leftSide">
-            <div className="menu">
-                <ul className="menuList">
-                <li>
-                    <a href="/">Dashboard</a>
-                </li>
-                <li>
-                    <a href="/transactions">Transactions</a>
-                </li>
-                <li>
-                    <a href="/">Wallet</a>
-                </li>
-                </ul>
-            </div>
+      <div className="leftSide">
+        <div className="menu">
+          <ul className="menuList">
+            <li>
+              <Link to="/" className="ButtonLink">
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/transactions" className="ButtonLink">
+                Transactions
+              </Link>
+            </li>
+          </ul>
         </div>
-        <div className="rightSide">
-            <div className="transactionsContainer">
-            <h1>Transactions</h1>
-            <div className='spendingsConatiner'>
-                <div className="searchBar">
-                    <input type="search" placeholder="Search here"  onChange={(e)=>{setsearchvalue(e.target.value)}} value={searchvalue}></input>
-                    <i className="gg-search"></i>
-                </div>
-                <ul className='spendings'>
-                    {filteredList.map((e, i) => {
-              return <SingleTransaction key={i} prop2={e} func={fetchdata}></SingleTransaction>;
-            })}
-                </ul>
+      </div>
+      <div className="rightSide">
+        <div className="transactionsContainer">
+          <h1>Transactions</h1>
+          <div className="spendingsConatiner">
+            <div className="searchBar">
+              <input
+                type="search"
+                placeholder="Search here"
+                onChange={(e) => {
+                  setsearchvalue(e.target.value);
+                }}
+                value={searchvalue}
+              ></input>
+              <i className="gg-search"></i>
             </div>
-            </div>
+            <ul className="spendings">
+              {filteredList.map((e, i) => {
+                return (
+                  <SingleTransaction
+                    key={i}
+                    prop2={e}
+                    func={fetchdata}
+                  ></SingleTransaction>
+                );
+              })}
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
   );
 }
