@@ -9,6 +9,11 @@ function NavBar(props){
     setPathName(window.location.pathname);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   const user = localStorage.getItem("token");
   console.log(user);
   const shouldShowHello = pathName !== "/login" && pathName !== "/signup";
@@ -31,7 +36,10 @@ function NavBar(props){
               </a>
             </li>}
             {shouldShowHello && props.data && (
-              <li className="ButtonLinkWrapper">Hello {props.data.name}</li>
+              <li className="ButtonLinkWrapper showName">Hello, {props.data.name}</li>
+            )}
+            {shouldShowHello && props.data && (
+              <button onClick={handleLogout} className="LogoutButton showLogout">Log Out</button>
             )}
           </ul>
         </div>

@@ -1,15 +1,24 @@
 .transactionsPage {
-    height: 90vh;
-    top: 10vh;
+    height: 100%;
+    top: 10%;
     position: relative;
     background-color: beige;
 }
 
 .transactionsContainer {
     position: relative;
-    top: 10%;
+    top: 20vh;
+    width: 80%;
 }
 
+.menu {
+    margin-top: 3rem;
+    text-align: right;
+    margin-right: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
 .transactionsContainer h1 {
     font-family: Cabin, sans-serif;
     font-size: 2.25rem;

@@ -34,10 +34,8 @@ function Dashboard(){
         console.log(amount);
         toggleForm()
     }
-    
-      
 
-      const handleAmountChange = (event) => {
+    const handleAmountChange = (event) => {
         let inputValue = event.target.value;
         // remove all non-numeric characters except htmlFor decimal point
         inputValue = inputValue.replace(/[^0-9.]/g, '');
@@ -51,14 +49,13 @@ function Dashboard(){
           currency: 'USD'
         });
         setAmount(formattedAmount);
-      };
+    };
 
     useEffect(() => {
         const today = new Date().toISOString().split("T")[0];
         setMaxDate(today);
     }, []);
     
-
     const [showModal, setShowModal] = useState(false);
 
     const toggleForm = () => {
@@ -74,9 +71,6 @@ function Dashboard(){
               className="addForm"
               id="addTransaction"
             >
-              <button className="btn" onClick={toggleForm}>
-                Exit
-              </button>
               <label htmlFor="amount">Amount: </label>
               <input
                 type="text"
@@ -105,7 +99,10 @@ function Dashboard(){
                 required
               />{" "}
               <br />
-              <button className="btn">ADD</button>
+              <div className='btns'>
+                <button className="btn">ADD</button>
+                <button className="btn-exit" onClick={toggleForm}>EXIT</button>
+              </div>
             </form>
           </div>
         )}
@@ -121,9 +118,6 @@ function Dashboard(){
               <li>
                 <a href="/">Wallet</a>
               </li>
-              <button onClick={handleLogout} className="LogoutButton">
-                Logout
-              </button>
             </ul>
           </div>
 
@@ -133,7 +127,7 @@ function Dashboard(){
           <div className="dashboardContainer">
             <div className="moneyContainer">
               <div className="moneyLeft">
-                <h3>Money Left:${sum}</h3>
+                <h3>Money Left: ${sum}</h3>
               </div>
               <div className="cardInfo">
                 <div className="addTransactionButton">
