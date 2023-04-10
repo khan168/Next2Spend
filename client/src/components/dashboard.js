@@ -157,20 +157,25 @@ function Dashboard(){
                 </div>
               </div>
             </div>
-            <div className="spendingsConatiner">
-              <h3>Latest Spendings:</h3>
-              <ul className="spendings">
-                {shortlist.map((e, i) => {
-                  return (
-                    <li className="spending" key={i}>
-                      <p className="date">{e.transactionDate}</p>
-                      <p className="title">{e.title}</p>
-                      <p className="amount">${e.amount}</p>
-                    </li>
-                  );
-                })}
-              </ul>
-              <h1>....</h1>
+            <div className="ContainerLatestSpending">
+              <div className="spendingsConatiner">
+                
+              </div>
+              <div className="spendingsConatiner">
+                <h3>Latest Spendings:</h3>
+                <ul className="spendings">
+                  {shortlist.map((e, i) => {
+                    return (
+                      <li className="spending" key={i}>
+                        <p className="date">{e.transactionDate}</p>
+                        <p className="title">{e.title}</p>
+                        <p className="amount">${e.amount}</p>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <h1>....</h1>
+              </div>
             </div>
           </div>
         </div>
