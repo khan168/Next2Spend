@@ -3,6 +3,8 @@ import React, { useState, useEffect} from 'react';
 import '../styles/Dashboard.css';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import "../styles/pie.css";
+import * as d3 from "d3";
 
 function Dashboard(){
     const [list,setList] = useState([]);
@@ -11,8 +13,56 @@ function Dashboard(){
     const [reason,setReason]=useState("");
     const user = localStorage.getItem("token");
     React.useEffect(()=>{
-        //get all transactions
-        fetchdata();
+      // Create a dataset of pets and the amount of people that own them
+      let dataSet = [
+        { subject: "Dogs", count: 150 },
+        { subject: "Fish", count: 75 },
+        { subject: "Cats", count: 135 },
+        { subject: "Bunnies", count: 240 },
+      ];
+      // Generate a p tag for each element in the dataSet with the text: Subject: Count
+      d3.select("#pgraphs")
+        .selectAll("h")
+        .data(dataSet)
+        .enter()
+        .append("h")
+        .text((dt) => dt.subject + ": " + dt.count + " ");
+
+      // Bar Chart:
+      const getMax = () => {
+        // Calculate the maximum value in the DataSet
+        let max = 0;
+        dataSet.forEach((dt) => {
+          if (dt.count > max) {
+            max = dt.count;
+          }
+        });
+        return max;
+      };
+
+      // Create each of the bars and then set them all to have the same height(Which is the max value)
+      d3.select("#BarChart")
+        .selectAll("div")
+        .data(dataSet)
+        .enter()
+        .append("div")
+        .classed("bar", true)
+        .style("height", `${getMax()}px`);
+
+      //Transition the bars into having a height based on their corresponding count value
+      d3.select("#BarChart")
+        .selectAll(".bar")
+        .transition()
+        .duration(1000)
+        .style("height", (bar) => `${bar.count}px`)
+        .style("width", "90px")
+        .style("margin-right", "10px")
+        .delay(300); // Fix their width and margin
+
+
+      
+      //get all transactions
+      fetchdata();
     },[])
 
     const fetchdata = ()=>{
@@ -159,7 +209,8 @@ function Dashboard(){
             </div>
             <div className="ContainerLatestSpending">
               <div className="spendingsConatiner">
-                
+                <div id="BarChart"></div>
+                <div id="pgraphs"></div>
               </div>
               <div className="spendingsConatiner">
                 <h3>Latest Spendings:</h3>

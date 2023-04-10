@@ -255,3 +255,9 @@
   height: 500px;
   gap: 50px;
 }
+
+#pgraphs{
+  display: flex;
+  gap: 40px;
+  margin-left: 75px;
+}
