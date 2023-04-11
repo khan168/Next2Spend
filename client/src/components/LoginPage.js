@@ -62,11 +62,11 @@ function LoginPage() {
                 required
               ></input>
             </div>
+            {err && <span className="errorLogin">Email or password might are incorrect. Please try again.</span>}
             <div className="LoginButton">
-              <input type="submit" value="Log in"></input>
+              <input type="submit" value="Log in" className="submitBtn"></input>
             </div>
           </form>
-          {err && <span>Invalid Credentials</span>}
         </div>
       </div>
     </div>
