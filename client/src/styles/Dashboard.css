@@ -161,11 +161,18 @@
 .spendingsConatiner .title,
 .spendingsConatiner .amount {
   font-size: 1.2rem;
+  width: 25%;
+  text-align: left;
+}
+
+.spendingsConatiner .amount {
+  text-align: right;
 }
 
 .spendingsConatiner .title {
   flex-grow: 1;
   margin: 0 1rem;
+  text-align: left;
 }
 
 .popupForm {
@@ -199,6 +206,18 @@
   padding: 0.5rem;
   background-color: white;
   border: 1px white solid ;
+}
+
+.inputAmount {
+  display: flex;
+  align-items: baseline;
+}
+
+.inputAmount span {
+  font-family: 'Cabin', sans-serif;
+  font-size: 1rem;
+  color: #1A535C;
+  margin-right: 0.125rem;
 }
 
 .btn, .btn-exit {

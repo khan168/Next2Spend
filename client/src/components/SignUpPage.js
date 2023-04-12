@@ -24,13 +24,13 @@ function SignUpPage() {
     }
   };
   return (
-    <div class="SignUpPage">
+    <div className="SignUpPage">
       <div className="SignUpContainer">
         <h1>Sign Up</h1>
         <div className="SignUpForm">
           <form className="SignUp" onSubmit={handleSubmit}>
             <div className="DataInput">
-              <label for="name">Name: </label>
+              <label htmlFor="name">Name: </label>
               <input
                 type="text"
                 id="name"
@@ -40,7 +40,7 @@ function SignUpPage() {
               ></input>
             </div>
             <div className="DataInput">
-              <label for="email">Email: </label>
+              <label htmlFor="email">Email: </label>
               <input
                 type="text"
                 id="email"
@@ -50,7 +50,7 @@ function SignUpPage() {
               ></input>
             </div>
             <div className="DataInput">
-              <label for="password">Password: </label>
+              <label htmlFor="password">Password: </label>
               <input
                 type="password"
                 id="password"
