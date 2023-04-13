@@ -41,6 +41,7 @@ const createTransaction =async (req,res,next)=>{
           userid: req.user.id,
           title: req.body.title,
           transactionDate:req.body.transactionDate,
+          category:req.body.category
         });
         await transaction.save();
         res.status(201).json({ transaction: transaction });

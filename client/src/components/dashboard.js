@@ -2,16 +2,23 @@ import React, { useState, useEffect} from 'react';
 import '../styles/Dashboard.css';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import "../styles/pie.css";
+import * as d3 from "d3";
 
 function Dashboard() {
     const [list,setList] = useState([]);
     const [maxDate, setMaxDate] = useState("");
     const [reason,setReason]=useState("");
+    const [selectedOption, setSelectedOption] = useState("option1");
     const user = localStorage.getItem("token");
     React.useEffect(()=>{
-        //get all transactions
-        fetchdata();
+      fetchdata();
+      // Create a dataset of pets and the amount of people that own them
     },[])
+
+    const handleOptionChange = (e) => {
+      setSelectedOption(e.target.value);
+    };
 
     const fetchdata = ()=>{
     axios
@@ -20,7 +27,68 @@ function Dashboard() {
           Authorization: `Bearer ${user}`,
         },
       })
-      .then((response) => setList(response.data.transaction))
+      .then((response) =>{
+        let dataSet = [
+          { subject: "Food", count: 0 },
+          { subject: "Clothing", count: 0 },
+          { subject: "School", count: 0 },
+          { subject: "Others", count: 0 },
+        ];
+        setList(response.data.transaction);
+        const newlist = response.data.transaction;
+        var total = 0;
+        newlist.forEach((e) => {
+          total+=e.amount;
+          if (e.category === "food") {
+            dataSet[0].count = (dataSet[0].count+ e.amount);
+          } else if (e.category === "clothing") {
+            dataSet[1].count = (dataSet[1].count + e.amount);
+          } else if (e.category === "school") {
+            dataSet[2].count = (dataSet[2].count + e.amount);
+          } else {
+            dataSet[3].count = (dataSet[3].count + e.amount);
+          }
+        });
+        // Generate a p tag for each element in the dataSet with the text: Subject: Count
+        d3.select("#pgraphs")
+          .selectAll("h")
+          .data(dataSet)
+          .enter()
+          .append("h")
+          .text((dt) => dt.subject + ": " + Math.round(100*dt.count/total) + " ");
+
+        // Bar Chart:
+        const getMax = () => {
+          // Calculate the maximum value in the DataSet
+          let max = 0;
+          dataSet.forEach((dt) => {
+            if (dt.count > max) {
+              max = dt.count;
+            }
+          });
+          return max;
+        };
+
+        // Create each of the bars and then set them all to have the same height(Which is the max value)
+        d3.select("#BarChart")
+          .selectAll("div")
+          .data(dataSet)
+          .enter()
+          .append("div")
+          .classed("bar", true)
+          .style("height", `${getMax()}px`);
+
+        //Transition the bars into having a height based on their corresponding count value
+        d3.select("#BarChart")
+          .selectAll(".bar")
+          .transition()
+          .duration(1000)
+          .style("height", (bar) => `${bar.count/total*100}px`)
+          .style("width", "90px")
+          .style("margin-right", "10px")
+          .delay(300); // Fix their width and margin
+        //get all transactions
+      })
       .catch((error) => console.log(error));
     }
 
@@ -33,7 +101,7 @@ function Dashboard() {
         const amount = parseFloat(e.target[0].value.replace(/[^0-9.-]+/g, "")).toFixed(2);
         const reason = e.target[1].value;
         const maxDate = e.target[2].value;
-        const data = { amount:amount, title: reason, transactionDate:maxDate };
+        const data = { amount:amount, title: reason, transactionDate:maxDate,category:selectedOption};
         axios
           .post("http://localhost:5000/api/transactions", data, {
             headers: {
@@ -105,6 +173,51 @@ function Dashboard() {
                 required
               />{" "}
               <br />
+              <p>Please select your transaction category:</p>
+              <br />
+              <div>
+                <div>
+                  <label for="option1">Food</label>
+                  <input
+                    type="radio"
+                    id="option1"
+                    name="option"
+                    value="food"
+                    onChange={handleOptionChange}
+                  />
+                </div>
+                <div>
+                  <label for="option2">Clothing</label>
+                  <input
+                    type="radio"
+                    id="option2"
+                    name="option"
+                    value="clothing"
+                    onChange={handleOptionChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="option3">School</label>
+                  <input
+                    type="radio"
+                    id="option3"
+                    name="option"
+                    value="school"
+                    onChange={handleOptionChange}
+                  />
+                </div>
+                <div>
+                  <label for="option4">other</label>
+                  <input
+                    type="radio"
+                    id="option4"
+                    name="option"
+                    value="other"
+                    onChange={handleOptionChange}
+                  />
+                </div>
+              </div>
+              <br />
               <div className="btns">
                 <button className="btn">ADD</button>
                 <button className="btn-exit" onClick={toggleForm}>
@@ -146,20 +259,26 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="spendingsConatiner">
-              <h3>Latest Spendings:</h3>
-              <ul className="spendings">
-                {shortlist.map((e, i) => {
-                  return (
-                    <li className="spending" key={i}>
-                      <p className="date">{e.transactionDate}</p>
-                      <p className="title">{e.title}</p>
-                      <p className="amount">${e.amount}</p>
-                    </li>
-                  );
-                })}
-              </ul>
-              <h1>....</h1>
+            <div className="ContainerLatestSpending">
+              <div className="spendingsConatiner">
+                <div id="BarChart"></div>
+                <div id="pgraphs"></div>
+              </div>
+              <div className="spendingsConatiner">
+                <h3>Latest Spendings:</h3>
+                <ul className="spendings">
+                  {shortlist.map((e, i) => {
+                    return (
+                      <li className="spending" key={i}>
+                        <p className="date">{e.transactionDate}</p>
+                        <p className="title">{e.title}</p>
+                        <p className="amount">${e.amount}</p>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <h1>....</h1>
+              </div>
             </div>
           </div>
         </div>
