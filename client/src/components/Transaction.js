@@ -35,9 +35,10 @@ export const SingleTransaction = (props) => {
           <i onClick={handleClick} className="gg-trash"></i>
         </button>
       </li>
-
-      {Click && <button onClick={handleDelete}>Confirm delete</button>}
-      {Click && <button onClick={handleClick}>Close</button>}
+      <div className='btns-confirm' >
+        {Click && <button className="btn-confirm" onClick={handleDelete}>Confirm</button>}
+        {Click && <button className='btn-close' onClick={handleClick}>Close</button>}
+      </div>
     </div>
   );
 }

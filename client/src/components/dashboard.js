@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect} from 'react';
 import '../styles/Dashboard.css';
 import axios from "axios";
@@ -6,9 +5,8 @@ import { Link } from 'react-router-dom';
 import "../styles/pie.css";
 import * as d3 from "d3";
 
-function Dashboard(){
+function Dashboard() {
     const [list,setList] = useState([]);
-    const [amount, setAmount] = useState("");
     const [maxDate, setMaxDate] = useState("");
     const [reason,setReason]=useState("");
     const [selectedOption, setSelectedOption] = useState("option1");
@@ -100,7 +98,7 @@ function Dashboard(){
         e.preventDefault();
 
         //create transaction
-        const amount = parseInt(e.target[0].value.slice(1));
+        const amount = parseFloat(e.target[0].value.replace(/[^0-9.-]+/g, "")).toFixed(2);
         const reason = e.target[1].value;
         const maxDate = e.target[2].value;
         const data = { amount:amount, title: reason, transactionDate:maxDate,category:selectedOption};
@@ -120,29 +118,13 @@ function Dashboard(){
           
     }
 
-    const handleAmountChange = (event) => {
-        let inputValue = event.target.value;
-        // remove all non-numeric characters except htmlFor decimal point
-        inputValue = inputValue.replace(/[^0-9.]/g, '');
-        // make sure there's only one decimal point
-        inputValue = inputValue.replace(/(\..*)\./g, '$1');
-        // parse the input value as a number
-        const parsedAmount = parseFloat(inputValue);
-        // format the parsed amount as a currency string
-        const formattedAmount = parsedAmount.toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD'
-        });
-        setAmount(formattedAmount);
-    };
-
     useEffect(() => {
         const today = new Date().toISOString().split("T")[0];
         setMaxDate(today);
     }, []);
     
     const [showModal, setShowModal] = useState(false);
-
+    const [amount, setAmount] = useState(0);
     const toggleForm = () => {
         setShowModal(!showModal);
     };
@@ -157,13 +139,20 @@ function Dashboard(){
               id="addTransaction"
             >
               <label htmlFor="amount">Amount: </label>
-              <input
-                type="text"
-                id="amount"
-                name="amount"
-                value={amount}
-                onChange={(e) => handleAmountChange(e)}
-              />
+              <div className='inputAmount'>
+                <span>$</span>
+                <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    step="0.01"
+                    min="0"
+                    // prefix="$"
+                    placeholder="0.00"
+                    onChange={(e) => setAmount(parseFloat(e.target.value))}
+                    required
+                />
+              </div>
               <label htmlFor="reason">Reason: </label>
               <input
                 type="text"
@@ -295,6 +284,6 @@ function Dashboard(){
         </div>
       </div>
     );
-}
+};
 
 export default Dashboard;

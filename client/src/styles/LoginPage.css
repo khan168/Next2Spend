@@ -92,5 +92,13 @@
     cursor: pointer;
 }
 
+.LoginButton input:hover {
+    opacity: 0.7;
+}
 
-
+.errorLogin {
+    color: red;
+    font-family: 'Cabin', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+}

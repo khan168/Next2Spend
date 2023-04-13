@@ -79,3 +79,30 @@
     opacity: 1;
 }
 
+.btns-confirm {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-confirm, .btn-close {
+    display: inline-flex;
+    width: 6rem;
+    justify-content: center;
+    padding: 0.5rem;
+    background-color: #1A535C;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    border: 1px #1A535C solid;
+}
+
+.btn-confirm {
+    margin-right: 1rem;
+}
+
+.btn-close {
+    background-color: #B2B2B2;
+    border: 1px #B2B2B2 solid;
+}
+
