@@ -38,25 +38,17 @@ function Dashboard() {
         const newlist = response.data.transaction;
         var total = 0;
         newlist.forEach((e) => {
-          total+=e.amount;
+          total += e.amount;
           if (e.category === "food") {
-            dataSet[0].count = (dataSet[0].count+ e.amount);
+            dataSet[0].count = dataSet[0].count + e.amount;
           } else if (e.category === "clothing") {
-            dataSet[1].count = (dataSet[1].count + e.amount);
+            dataSet[1].count = dataSet[1].count + e.amount;
           } else if (e.category === "school") {
-            dataSet[2].count = (dataSet[2].count + e.amount);
+            dataSet[2].count = dataSet[2].count + e.amount;
           } else {
-            dataSet[3].count = (dataSet[3].count + e.amount);
+            dataSet[3].count = dataSet[3].count + e.amount;
           }
         });
-        // Generate a p tag for each element in the dataSet with the text: Subject: Count
-        d3.select("#pgraphs")
-          .selectAll("h")
-          .data(dataSet)
-          .enter()
-          .append("h")
-          .text((dt) => dt.subject + ": " + Math.round(100*dt.count/total) + " ");
-
         // Bar Chart:
         const getMax = () => {
           // Calculate the maximum value in the DataSet
@@ -83,11 +75,19 @@ function Dashboard() {
           .selectAll(".bar")
           .transition()
           .duration(1000)
-          .style("height", (bar) => `${bar.count/total*100}px`)
+          .style("height", (bar) => `${(bar.count / total) * 100}px`)
           .style("width", "90px")
           .style("margin-right", "10px")
           .delay(300); // Fix their width and margin
-        //get all transactions
+
+        // Append the text to the p tag with the updated dataset
+        d3.select("#pgraphs")
+          .selectAll("h")
+          .data(dataSet)
+          .text(
+            (dt) =>
+              dt.subject + ": " + Math.round((100 * dt.count) / total) + " "
+          );
       })
       .catch((error) => console.log(error));
     }
