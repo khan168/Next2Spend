@@ -60,7 +60,17 @@ function Dashboard() {
           });
           return max;
         };
-
+        // Generate a p tag for each element in the dataSet with the text: Subject: Count
+        d3.select("#pgraphs")
+          .selectAll("h")
+          .data(dataSet)
+          .enter()
+          .append("h")
+          .text(
+            (dt) =>
+              dt.subject + ": " + Math.round((100 * dt.count) / total) + " "
+          );
+          
         // Create each of the bars and then set them all to have the same height(Which is the max value)
         d3.select("#BarChart")
           .selectAll("div")
